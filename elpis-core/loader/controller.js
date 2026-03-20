@@ -6,10 +6,7 @@ module.exports = (app) => {
   // 计算业务目录下 controller 文件夹的绝对路径
   const controllerPath = path.resolve(app.businessPath, `.${sep}controller`);
   // 递归匹配 controller 目录中的所有 .js 文件
-  const fileList = glob.sync(
-    path.resolve(controllerPath),
-    `.${sep}**${sep}**.js`,
-  );
+  const fileList = glob.sync(path.join(controllerPath, `**${sep}*.js`));
   // 用于按目录结构组织并存放所有中间件
   const controllers = {};
   fileList.forEach((file) => {
@@ -25,20 +22,21 @@ module.exports = (app) => {
     );
 
     // 按路径层级构造嵌套对象，并挂载中间件到内存 app 对象
-    let tempcontroller = controllers;
+    let tempController = controllers;
     const names = name.split(sep);
     for (let i = 0, len = names.length; i < len; ++i) {
       if (i === len - 1) {
         const ControllerModule = require(path.resolve(file))(app);
-        tempcontroller[name[i]] = new ControllerModule();
+        tempController[names[i]] = new ControllerModule();
       } else {
-        if (!tempcontroller[name[i]]) {
-          tempcontroller[name[i]] = {};
-          tempcontroller = tempcontroller[name[i]];
+        if (!tempController[names[i]]) {
+          tempController[names[i]] = {};
+          tempController = tempController[names[i]];
         }
       }
     }
   });
   // 将已组织的中间件集合暴露到 app 对象上
-  app.controllers = controllers;
+  console.log(controllers);
+  app.controller = controllers;
 };

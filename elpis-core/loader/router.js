@@ -11,11 +11,11 @@ const glob = require("glob");
 
 module.exports = (app) => {
   // 找到路由文件路径
-  const routerPath = path.resolve(app.businessPath, "router");
+  const routerPath = path.resolve(app.businessPath, `.${sep}router`);
   // 实例化 KoaRouter
   const router = new KoaRouter();
   // 注册所有路由
-  const fileList = glob.sync(path.resolve(routerPath, `${sep}**${sep}*.js`));
+  const fileList = glob.sync(path.resolve(routerPath, `.${sep}**${sep}*.js`));
   fileList.forEach((file) => {
     const routerFile = require(file)(app, router);
   });

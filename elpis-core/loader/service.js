@@ -6,7 +6,7 @@ module.exports = (app) => {
   // 计算业务目录下 service 文件夹的绝对路径
   const servicePath = path.resolve(app.businessPath, `.${sep}service`);
   // 递归匹配 service 目录中的所有 .js 文件
-  const fileList = glob.sync(path.resolve(servicePath), `.${sep}**${sep}**.js`);
+  const fileList = glob.sync(path.join(servicePath, `**${sep}*.js`));
   // 用于按目录结构组织并存放所有中间件
   const services = {};
   fileList.forEach((file) => {
@@ -27,15 +27,15 @@ module.exports = (app) => {
     for (let i = 0, len = names.length; i < len; ++i) {
       if (i === len - 1) {
         const serviceModule = require(path.resolve(file))(app);
-        tempservice[name[i]] = new serviceModule();
+        tempservice[names[i]] = new serviceModule();
       } else {
-        if (!tempservice[name[i]]) {
-          tempservice[name[i]] = {};
-          tempservice = tempservice[name[i]];
+        if (!tempservice[names[i]]) {
+          tempservice[names[i]] = {};
+          tempservice = tempservice[names[i]];
         }
       }
     }
   });
   // 将已组织的中间件集合暴露到 app 对象上
-  app.services = services;
+  app.service = services;
 };

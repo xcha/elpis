@@ -1,0 +1,5 @@
+module.exports = (app, router) => {
+  const { view: viewController } = app.controller;
+  // 正确写法：两个参数，用逗号分隔，但不要在外面套括号
+  router.get("/view/:page", viewController.renderPage.bind(viewController));
+};
