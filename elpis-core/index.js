@@ -31,15 +31,16 @@ module.exports = {
     configLoader(app);
     // 加载 extend
     extendLoader(app);
-    //注册路由
-    routerLoader(app);
 
-    //注册全局中间件
+    // 注册全局中间件 (必须在路由之前)
     try {
-      require(`${app.businessPath}${sep}middleware.js`)(app);
+      require(path.join(app.businessPath, "middleware.js"))(app);
     } catch (e) {
-      console.error("global middleware.js not found");
+      console.error("global middleware.js not found", e);
     }
+
+    // 注册路由
+    routerLoader(app);
 
     // 启动服务
     try {

@@ -6,10 +6,7 @@ module.exports = (app) => {
   // 计算业务目录下 middleware 文件夹的绝对路径
   const middlewarePath = path.resolve(app.businessPath, `.${sep}middleware`);
   // 递归匹配 middleware 目录中的所有 .js 文件
-  const fileList = glob.sync(
-    path.resolve(middlewarePath),
-    `.${sep}**${sep}**.js`,
-  );
+  const fileList = glob.sync(path.join(middlewarePath, `**${sep}*.js`));
   // 用于按目录结构组织并存放所有中间件
   const middlewares = {};
   fileList.forEach((file) => {
@@ -29,11 +26,11 @@ module.exports = (app) => {
     const names = name.split(sep);
     for (let i = 0, len = names.length; i < len; ++i) {
       if (i === len - 1) {
-        tempMiddleware[name[i]] = require(path.resolve(file))(app);
+        tempMiddleware[names[i]] = require(path.resolve(file))(app);
       } else {
-        if (!tempMiddleware[name[i]]) {
-          tempMiddleware[name[i]] = {};
-          tempMiddleware = tempMiddleware[name[i]];
+        if (!tempMiddleware[names[i]]) {
+          tempMiddleware[names[i]] = {};
+          tempMiddleware = tempMiddleware[names[i]];
         }
       }
     }
