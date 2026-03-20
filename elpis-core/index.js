@@ -18,7 +18,7 @@ module.exports = {
     app.baseDir = process.cwd(); //当前工作目录
     app.businessPath = path.resolve(app.baseDir, `.${sep}app`);
     app.env = env();
-
+    console.log("env:", app.env.get());
     //加载middleware
     middlewareLoader(app);
     //加载routerSchema
@@ -38,7 +38,7 @@ module.exports = {
     try {
       require(`${app.businessPath}${sep}middleware.js`)(app);
     } catch (e) {
-      console.error("middleware.js not found");
+      console.error("global middleware.js not found");
     }
 
     // 启动服务
