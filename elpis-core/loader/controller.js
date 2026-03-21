@@ -37,6 +37,5 @@ module.exports = (app) => {
     }
   });
   // 将已组织的中间件集合暴露到 app 对象上
-  console.log(controllers);
   app.controller = controllers;
 };

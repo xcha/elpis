@@ -1,6 +1,13 @@
 const path = require("path");
 
 module.exports = (app) => {
+  // 异常处理中间件
+  app.use(app.middlewares.errorHandler);
+  // API 签名验证中间件
+  app.use(app.middlewares.apiSignVerify);
+  // API 参数验证中间件
+  app.use(app.middlewares.apiParamsVerify);
+
   const koaStatic = require("koa-static");
   app.use(koaStatic(path.resolve(process.cwd(), "./app/public")));
 
