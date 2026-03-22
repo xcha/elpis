@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/js-md5@0.8.3/src/md5.min.js"></script>
   </head>
   <body>
+    <div id="root"></div>
     <div class="container">
       <input type="hidden" id="env" value="{{ env }}" />
       <input type="hidden" id="options" value="{{ options }}" />
@@ -18,6 +19,8 @@
       <img class="logo" src="../static/logo.jpg" alt="logo" />
       <p>这是您的第一个页面，简洁、优雅且充满可能。</p>
       <p>通过 Elpis 框架，您可以轻松构建现代化的 Web 应用。</p>
+      <p>我们 抓紧了所谓的人生。</p>
+
       <button id="getListBtn" onclick="handleClick()">获取项目列表</button>
     </div>
   </body>
@@ -29,29 +32,6 @@
     } catch (e) {
       console.error("Error parsing options:", e);
     }
-
-    const handleClick = () => {
-      const signKey = "zdx20040921";
-      const st = Date.now();
-      const sgin = md5(`${signKey}_${st}`);
-      axios
-        .request({
-          url: "/api/project/list",
-          method: "get",
-          headers: {
-            s_sign: sgin,
-            s_t: st,
-          },
-          params: {
-            proj_key: "test",
-            a: 1,
-            b: 2,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    };
   </script>
 </html>
 <style>
