@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page 1 - Elpis</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-md5@0.8.3/src/md5.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -30,9 +31,26 @@
     }
 
     const handleClick = () => {
-      axios.get("/api/project/list").then((res) => {
-        console.log(res);
-      });
+      const signKey = "zdx20040921";
+      const st = Date.now();
+      const sgin = md5(`${signKey}_${st}`);
+      axios
+        .request({
+          url: "/api/project/list",
+          method: "get",
+          headers: {
+            s_sign: sgin,
+            s_t: st,
+          },
+          params: {
+            proj_key: "test",
+            a: 1,
+            b: 2,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        });
     };
   </script>
 </html>

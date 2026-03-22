@@ -39,7 +39,6 @@ module.exports = (app) => {
       //生产环境
       envConfig = require(path.resolve(configPath, `.${sep}config.prod.js`));
     }
-    console.log(`加载${app.env.get()}环境config配置成功`, envConfig);
   } catch (e) {
     console.log(`加载config环境配置失败`);
   }

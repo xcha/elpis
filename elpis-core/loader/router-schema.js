@@ -11,11 +11,11 @@ const glob = require("glob");
 module.exports = (app) => {
   //读取app/router-schema/**/**.js下所有的文件
   const routerSchemaPath = path.resolve(
-    `${app.businessPath},.${sep}router-schema`,
+    app.businessPath,
+    `.${sep}router-schema`,
   );
-  const fileList = glob.sync(
-    path.resolve(routerSchemaPath, ".${sep}**${sep}**.js"),
-  );
+  const fileList = glob.sync(path.join(routerSchemaPath, `**${sep}*.js`));
+
   //注册所有routerSchema,使得可以app.routerSchema'这样访问
   let routerSchema = {};
   fileList.forEach((file) => {
