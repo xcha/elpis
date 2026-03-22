@@ -6,7 +6,7 @@ module.exports = (app) => {
   // 计算业务目录下 extend 文件夹的绝对路径
   const extendPath = path.resolve(app.businessPath, `.${sep}extend`);
   // 递归匹配 extend 目录中的所有 .js 文件
-  const fileList = glob.sync(path.resolve(extendPath), `.${sep}**${sep}**.js`);
+  const fileList = glob.sync(path.join(extendPath, `**${sep}*.js`));
   fileList.forEach((file) => {
     // 将绝对路径转换为相对名称：去掉 "extend/" 前缀与 ".js" 后缀
     let name = path.resolve(file);
@@ -22,12 +22,8 @@ module.exports = (app) => {
     // 加载扩展模块
     const extension = require(path.resolve(file))(app);
 
-    // 将扩展内容直接合并到 app 对象上，而不是嵌套在 app.extends 下
-    if (typeof extension === "object" && extension !== null) {
-      Object.assign(app, extension);
-    } else {
-      // 如果导出的是单个属性或函数，则按文件名挂载
-      app[name] = extension;
-    }
+    // 根据文件名进行挂载，避免直接 Object.assign 污染 app 核心属性
+    // 例如 logger.js 挂载到 app.logger
+    app[name] = extension;
   });
 };
