@@ -4,10 +4,16 @@
   <div>{{ content }}</div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
-const content = ref('')
+const content = ref('Page 2 Content')
 console.log("page2 init")
+</script>
+
+<script>
+export default {
+  name: 'Page2'
+}
 </script>
 
 <style lang="less" scoped>

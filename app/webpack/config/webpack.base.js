@@ -51,9 +51,15 @@ module.exports = {
       {
         test: /\.js$/,
         include: [path.resolve(process.cwd(), "./app/pages")],
-        use: {
-          loader: "babel-loader",
-        },
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [["@babel/preset-env", { modules: false }]],
+              plugins: ["@babel/plugin-transform-runtime"],
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg?g|gif)(\?.*)?$/,

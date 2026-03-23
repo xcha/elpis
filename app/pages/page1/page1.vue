@@ -4,11 +4,17 @@
     <div>{{ content }}</div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
-const content = ref('')
-console.log("page1 init")
-import utils from '$common/utils'   
+import utils from '$common/utils'
+const content = ref('Page 1 Content')
+console.log("page1 init", utils)
+</script>
+
+<script>
+export default {
+    name: 'Page1'
+}
 </script>
 
 <style lang="less" scoped>
