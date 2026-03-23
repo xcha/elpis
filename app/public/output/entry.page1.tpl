@@ -40,7 +40,7 @@
           method: "get",
           headers: {
             s_sign: sgin,
-            s_t: st,
+            s_st: st,
           },
           params: {
             proj_key: "test",
