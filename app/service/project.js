@@ -4,8 +4,8 @@ module.exports = (app) => {
     async getList() {
       return [
         {
-          name: "projectl",
-          desc: "projectl desc",
+          name: "project1",
+          desc: "project1 desc",
         },
         {
           name: "project2",

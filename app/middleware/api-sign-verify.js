@@ -7,7 +7,7 @@ module.exports = (app) => {
 
     const { path, method } = ctx;
     const { headers } = ctx.request;
-    const { s_sign: sSign, s_t: st } = headers;
+    const { s_sign: sSign, s_st: st } = headers;
 
     const signKey = "zdx20040921";
     const signature = md5(`${signKey}_${st}`);
