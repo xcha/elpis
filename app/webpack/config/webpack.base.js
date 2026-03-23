@@ -51,9 +51,15 @@ module.exports = {
       {
         test: /\.js$/,
         include: [path.resolve(process.cwd(), "./app/pages")],
-        use: {
-          loader: "babel-loader",
-        },
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [["@babel/preset-env", { modules: false }]],
+              plugins: ["@babel/plugin-transform-runtime"],
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg?g|gif)(\?.*)?$/,
@@ -87,8 +93,8 @@ module.exports = {
     alias: {
       $pages: path.resolve(process.cwd(), "./app/pages"),
       $common: path.resolve(process.cwd(), "./app/pages/common"),
-      $widgets: path.resolve(process.cwd(), "./app/widgets"),
-      $store: path.resolve(process.cwd(), "./app/store"),
+      $widgets: path.resolve(process.cwd(), "./app/pages/widgets"),
+      $store: path.resolve(process.cwd(), "./app/pages/store"),
     },
   },
   //配置webpack插件
@@ -101,6 +107,8 @@ module.exports = {
     //把第三方库暴露到window context下
     new webpack.ProvidePlugin({
       Vue: "vue",
+      axios: "axios",
+      _: "lodash",
     }),
     // 定义全局常量
     new webpack.DefinePlugin({
