@@ -122,7 +122,7 @@ module.exports = {
 
   optimization: {
     /**
-     * 把j$文件打包成3种类型
+     * 把js文件打包成3种类型
      * 1.vendor:第三方lib库，基本不会改动，除非依赖版本升级
      * 2.common：业务组件代码的公共部分抽取出来，改动较少
      * 3.entry.{page}：不同页面entry里的业务组件代码的差异部分，会经常改动
