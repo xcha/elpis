@@ -1,4 +1,4 @@
-module.exports = (app) => {
+module.exports = () => {
   return {
     isLocal() {
       return process.env._ENV === "local";

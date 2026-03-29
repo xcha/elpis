@@ -16,6 +16,9 @@ export default (pageComponent, { routes, libs } = {}) => {
   const app = createApp(pageComponent);
   app.use(ElementPlus);
   app.use(pinia);
+  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component);
+  }
 
   // 加载指定的库
   if (libs && libs.length) {
