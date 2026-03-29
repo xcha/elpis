@@ -1,6 +1,16 @@
 module.exports = (app, router) => {
   const { project: projectController } = app.controller;
-  // 正确写法：两个参数，用逗号分隔，但不要在外面套括号
+
+  router.get(
+    "/api/project",
+    projectController.getProject.bind(projectController),
+  );
+
+  router.get(
+    "/api/project/list",
+    projectController.getList.bind(projectController),
+  );
+
   router.get(
     //注册 get路由
     "/api/project/model_list", // 路径
