@@ -4,6 +4,7 @@ module.exports = (app) => {
     get(ctx) {
       const { proj_key: projKey } = ctx.request.query;
       const { project: projectService } = app.service;
+      const projConfig = projectService.get(projKey);
 
       if (!projConfig) {
         this.fail(ctx, "获取项目异常", 50000);

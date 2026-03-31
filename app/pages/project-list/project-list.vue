@@ -61,8 +61,10 @@ onMounted(() => {
 });
 
 const onEnter = (projItem) => {
-  console.log(`跳转到: ${projItem.name}`);
-};
+  const { origin } = window.location;
+  window.open(`${origin}/view/dashboard#${projItem.homePage}`);
+}
+
 </script>
 <style lang="less" scoped>
 .model-panel {

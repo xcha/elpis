@@ -53,11 +53,12 @@ const handleUserCommand = function (e) {
   height: 100%;
   min-width: 1000px;
   overflow: hidden;
-  color: #fff; // 设置字体颜色为 #fff
+  background-color: var(--el-bg-color);
+  color: var(--el-text-color-primary);
 
   .header {
     max-height: 120px;
-    border-bottom: 1px solid #E8E8E8;
+    border-bottom: 1px solid var(--el-border-color);
 
     .header-row {
       height: 60px;
@@ -104,7 +105,7 @@ const handleUserCommand = function (e) {
           height: 60px;
           line-height: 60px;
           outline: none;
-          color: #fff; // 确保下拉菜单文字也是白色
+          color: var(--el-text-color-primary);
         }
       }
     }
