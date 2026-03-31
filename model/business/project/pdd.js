@@ -1,7 +1,7 @@
 module.exports = {
   name: "拼多多",
   desc: "拼多多电商系统",
-  homePage: "",
+  homePage: "/todo?proj_key=pdd&key=product",
   menu: [
     {
       key: "product",
