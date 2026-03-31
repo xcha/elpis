@@ -80,7 +80,7 @@
     "mocha": "^6.2.3",
     "style-loader": "^0.14.1",
     "supertest": "^4.0.2",
-    "terser-webpack-plugin": "^2.3.8",
+    "terser-webpack-plugin": "^5.3.10",
     "url-loader": "^4.1.1",
     "validate-commit-msg": "^2.14.0",
     "vue-loader": "^17.4.2",
