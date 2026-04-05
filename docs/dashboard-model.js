@@ -42,10 +42,37 @@
               ...schema, // 标准schema配置
               type: "",
               label: "",
+              tableOption: {
+                ...elTableColumnConfig,
+                visiable: true,
+              },
             },
           },
         },
-        tableConfig: {},
+        // table 相关配置
+        tableConfig: {
+          headerButtons: [
+            {
+              label: "", // 按钮中文名
+              eventKey: "", // 按钮事件名
+              eventOption: {}, // 按钮具体配置
+              ...elButtonConfig, // 标准 el-button 配置
+            },
+          ],
+          rowButtons: [
+            {
+              label: "", // 按钮中文名
+              eventKey: "", // 按钮事件名
+              eventOption: {
+                //paramkey=参数的键值
+                //rowvalueKey=参数值（当格式为schema:：tablekey的时候，到table中找响应的字段）
+                paramKey: rowValueKey,
+              }, // 按钮具体配置
+              ...elButtonConfig, // 标准 el-button 配置
+            },
+          ],
+        },
+
         searchConfig: {},
         components: {},
       },

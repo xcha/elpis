@@ -47,9 +47,14 @@ a {
 }
 body,
 html {
+  height: 100%;
   font:
     14px "微软雅黑",
     Arial;
+}
+
+#root {
+  height: 100%;
 }
 input {
   outline: none;

@@ -8,7 +8,7 @@ import Axios from "axios";
 import { ElMessage, messageConfig } from "element-plus";
 const curl = ({
   url,
-  method = "post",
+  method = "get",
   headers = {},
   query = {},
   data = {},

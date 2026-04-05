@@ -1,6 +1,8 @@
 <template>
-  <h1>待开发
-  </h1>
+  <div>123</div>
 </template>
-<script setup></script>
+
+<script setup>
+</script>
+
 <style lang="less" scoped></style>

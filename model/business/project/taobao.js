@@ -1,7 +1,7 @@
 module.exports = {
   name: "淘宝",
   desc: "淘宝电商系统",
-  homePage: "/todo?proj_key=taobao&key=product",
+  homePage: "/schema?proj_key=taobao&key=product",
   menu: [
     {
       key: "order",
@@ -9,7 +9,7 @@ module.exports = {
       menuType: "module",
       moduleType: "iframe",
       iframeConfig: {
-        path: "http://www.baidu.com",
+        path: "https://www.bilibili.com",
       },
     },
     {

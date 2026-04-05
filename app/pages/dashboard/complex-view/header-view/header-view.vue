@@ -1,10 +1,10 @@
 <template>
-  <headerContainer :title="projName">
+  <header-container :title="projName" class="header-view-container">
     <template #menu-content>
       <!-- 根据 menustore.menuList渲染 -->
       <el-menu :default-active="activeKey" :ellipsis="false" mode="horizontal" @select="onMenuSelect">
         <template v-for="item in menuStore.menuList">
-          <SubMenu v-if="item.subMenu && item.subMenu.length > 0" :menuItem="item"></SubMenu>
+          <sub-menu v-if="item.subMenu && item.subMenu.length > 0" :menu-item="item"></sub-menu>
           <el-menu-item v-else :index="item.key">
             {{ item.name }}
           </el-menu-item>
@@ -31,19 +31,18 @@
     </template>
 
     <template #main-content>
-      <slot name="main-content"></slot>
+      <slot name="main-content" /> <!-- 必须有这一句！ -->
     </template>
-  </headerContainer>
+  </header-container>
 </template>
 
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import SubMenu from '../sub-menu/sub-menu.vue';
-import headerContainer from '$widgets/header-container/header-container.vue';
+import HeaderContainer from '$widgets/header-container/header-container.vue';
 import { useMenuStore } from '$store/menu.js';
 import { useProjectStore } from '$store/project.js';
-
 const route = useRoute()
 const menuStore = useMenuStore();
 const projectStore = useProjectStore();
@@ -55,6 +54,14 @@ defineProps({
 const emit = defineEmits(['menu-select'])
 
 const activeKey = ref('');
+const setActiveKey = function () {
+  const menuItem = menuStore.findMenuItem({
+    key: 'key',
+    value: route.query.key
+  });
+  activeKey.value = menuItem?.key;
+}
+
 
 watch(() => route.query.key, () => {
   setActiveKey();
@@ -65,14 +72,6 @@ watch(() => menuStore.menuList, () => {
 onMounted(() => {
   setActiveKey();
 });
-
-const setActiveKey = function () {
-  const menuItem = menuStore.findMenuItem({
-    key: 'key',
-    value: route.query.key
-  });
-  activeKey.value = menuItem?.key;
-}
 
 const onMenuSelect = function (menuKey) {
   const menuItem = menuStore.findMenuItem({
@@ -92,6 +91,10 @@ const handleProjectCommand = function (e) {
 
 </script>
 <style lang="less" scoped>
+.header-view-container {
+  height: 100%;
+}
+
 .project-list {
   margin-right: 20px;
   cursor: pointer;

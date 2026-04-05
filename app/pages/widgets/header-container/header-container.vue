@@ -110,5 +110,12 @@ const handleUserCommand = function (e) {
       }
     }
   }
+
+  .main-container {
+    padding: 0; // 去除默认内边距，让 iframe 铺满
+    flex: 1; // 占据剩余所有空间
+    height: 0; // 配合 flex: 1 在某些浏览器下确保高度计算正确
+    overflow: hidden;
+  }
 }
 </style>

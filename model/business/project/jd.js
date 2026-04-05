@@ -1,7 +1,7 @@
 module.exports = {
   name: "京东",
   desc: "京东电商系统",
-  homePage: "/todo?proj_key=jd&key=product",
+  homePage: "/schema?proj_key=jd&key=product",
   menu: [
     {
       key: "shop-setting",
@@ -23,8 +23,40 @@ module.exports = {
           menutType: "module",
           moduleType: "iframe",
           iframeConfig: {
-            path: "http://www.baidu.com",
+            path: "https://www.bilibili.com",
           },
+        },
+        {
+          key: "categories",
+          name: "分类数据",
+          menuType: "group",
+          subMenu: [
+            {
+              key: "category-1",
+              name: "一级分类",
+              menuType: "module",
+              moduleType: "custom",
+              customConfig: { path: "/todo" },
+            },
+            {
+              key: "category-2",
+              name: "二级分类",
+              menuType: "module",
+              moduleType: "iframe",
+              iframeConfig: {
+                path: "https://www.bilibili.com",
+              },
+            },
+            {
+              key: "tags",
+              name: "标签",
+              menuType: "module",
+              moduleType: "custom",
+              customConfig: {
+                path: "/todo",
+              },
+            },
+          ],
         },
       ],
     },

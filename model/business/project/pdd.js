@@ -1,7 +1,7 @@
 module.exports = {
   name: "拼多多",
   desc: "拼多多电商系统",
-  homePage: "/todo?proj_key=pdd&key=product",
+  homePage: "/schema?proj_key=pdd&key=product",
   menu: [
     {
       key: "product",
@@ -32,7 +32,33 @@ module.exports = {
             name: "信息查询",
             moduleType: "iframe",
             iframeConfig: {
-              path: "http://www.baidu.com",
+              path: "https://www.bilibili.com",
+            },
+          },
+          {
+            key: "category-1",
+            name: "一级分类",
+            menuType: "module",
+            moduleType: "custom",
+            customConfig: { path: "/todo" },
+          },
+          {
+            key: "category-2",
+            name: "二级分类",
+            menuType: "module",
+            moduleType: "iframe",
+            iframeConfig: {
+              path: "https://www.bilibili.com",
+            },
+          },
+          {
+            key: "tags",
+            name: "标签",
+            menuType: "module",
+            moduleType: "schema",
+            schemaConfig: {
+              api: "/api/client",
+              schema: {},
             },
           },
         ],
@@ -43,7 +69,7 @@ module.exports = {
       name: "信息查询(拼多多)",
       moduleType: "iframe",
       iframeConfig: {
-        path: "http://www.baidu.com",
+        path: "https://www.bilibili.com",
       },
     },
   ],

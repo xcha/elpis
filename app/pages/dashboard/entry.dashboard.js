@@ -44,5 +44,4 @@ routes.push({
   path: "/sider/:chapters+",
   component: () => import("./complex-view/sider-view/sider-view.vue"),
 });
-
 boot(dashboard, { routes });
