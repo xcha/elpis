@@ -17,7 +17,7 @@
           <img src="./asserts/logo.jpg" class="avatar" />
           <el-dropdown @command="handleUserCommand">
             <span class="user-name">
-              {{ userName }}<i class="el-icon-arrow-down el-icon--right"></i>
+              <i class="el-icon-arrow-down el-icon--right"> {{ userName }}</i>
             </span>
             <template #dropdown>
               <el-dropdown-item command="logout">退出登录</el-dropdown-item>
@@ -28,30 +28,42 @@
     </el-header>
     <el-main class="main-container">
       <!--核心内容填充区域-->
-      <slot name="main-content"></slot>
+      <slot name="main-content">
+        <h1>main-content</h1>
+      </slot>
     </el-main>
   </el-container>
 </template>
+
 <script setup>
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
 
 defineProps({
   title: {
     type: String,
-    default: 'ELpis'
+    default: 'Elpis'
   }
 })
 
-const userName = ref('danking')
-const handleUserCommand = function (e) {
+const emit = defineEmits(['project-change'])
 
+const userName = ref('danking')
+
+const handleUserCommand = function (command) {
+  if (command === 'logout') {
+    window.location.href = '/view/project-list';
+  }
 }
 </script>
 
 <style lang="less" scoped>
+/* 样式保持不变 */
 .header-container {
   height: 100%;
-  min-width: 1000px;
   overflow: hidden;
   background-color: var(--el-bg-color);
   color: var(--el-text-color-primary);
@@ -85,7 +97,7 @@ const handleUserCommand = function (e) {
       }
 
       .setting-panel {
-        margin-left: auto; // 居右显示
+        margin-left: auto;
         min-width: 180px;
         display: flex;
         align-items: center;
@@ -112,9 +124,11 @@ const handleUserCommand = function (e) {
   }
 
   .main-container {
-    padding: 0; // 去除默认内边距，让 iframe 铺满
-    flex: 1; // 占据剩余所有空间
-    height: 0; // 配合 flex: 1 在某些浏览器下确保高度计算正确
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
     overflow: hidden;
   }
 }

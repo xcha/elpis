@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-console.log('sider-con')
 </script>
 
 <style lang="less" scoped>
@@ -22,7 +21,11 @@ console.log('sider-con')
   }
 
   .main {
-    overflow: auto;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   :deep(.el-menu) {

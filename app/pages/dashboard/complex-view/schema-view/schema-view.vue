@@ -10,12 +10,14 @@ import SearchPanel from './complex-veiw/search-panel/search-panel.vue';
 import TablePanel from './complex-veiw/table-panel/table-panel.vue';
 import { useSchema } from './hook/schema.js'
 
-const { api, tableConfig, tableSchema } = useSchema()
+const { api, tableConfig, tableSchema, searchConfig, searchSchema } = useSchema()
 
 provide('schemaViewData', {
   api,
   tableConfig,
-  tableSchema
+  tableSchema,
+  searchConfig,
+  searchSchema
 })
 
 </script>

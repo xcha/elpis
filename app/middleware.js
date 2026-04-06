@@ -7,6 +7,8 @@ module.exports = (app) => {
   app.use(app.middlewares.apiSignVerify);
   // API 参数验证中间件
   app.use(app.middlewares.apiParamsVerify);
+  // 引入项目处理中间件
+  app.use(app.middlewares.projectHandler);
 
   const koaStatic = require("koa-static");
   app.use(koaStatic(path.resolve(process.cwd(), "./app/public")));

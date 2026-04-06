@@ -24,6 +24,7 @@ const menuStore = useMenuStore();
 const projectStore = useProjectStore();
 
 onMounted(() => {
+  // window.projKey = route.query.proj_key;
   getProjectList();
   getProjectConfig();
 });
@@ -77,7 +78,7 @@ const onMenuSelect = function (menuItem) {
 
   }
   router.push({
-    path: pathMap[moduleType],
+    path: `/view/dashboard${pathMap[moduleType]}`,
     query: {
       key,
       proj_key: route.query.proj_key
@@ -89,6 +90,8 @@ const onMenuSelect = function (menuItem) {
 <style lang="less" scoped>
 .dashboard-wrapper {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 :deep(.el-menu--horizontal > .el-menu-item) {

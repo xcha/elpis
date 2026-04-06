@@ -20,6 +20,13 @@ const curl = ({
   const signKey = "zdx20040921";
   const st = Date.now();
   // 构造请求参数(把参数转换为Axios参数 )
+
+  const dtoHeaders = { ...headers, s_sign: md5(`${signKey}_${st}`), s_st: st };
+
+  if (url.indexOf("/api/proj/") > -1 && window.projKey) {
+    dtoHeaders.proj_key = window.projKey;
+  }
+
   const ajaxSetting = {
     url,
     method,
@@ -27,11 +34,7 @@ const curl = ({
     data,
     responseType,
     timeout,
-    headers: {
-      ...headers,
-      s_sign: md5(`${signKey}_${st}`),
-      s_st: st,
-    },
+    headers: dtoHeaders,
   };
 
   return Axios.request(ajaxSetting)

@@ -1,0 +1,68 @@
+<template>
+  <el-form v-if="schema && schema.properties" :inlint="true" class="schema-search-bar">
+    <!-- 动态组件 -->
+    <el-form-item v-for="(schemaItem, key) in schema.properties" :key="key" :label="schemaItem.label">
+      <!-- 展示子组件 -->
+      <component :ref="handleSearchComList" :is="SearchItemConfig[schemaItem.option?.comType]?.component"
+        :schemaKey="key" :schema="schemaItem" @loaded="handleChildLoaded"></component>
+    </el-form-item>
+
+    <!-- 操作区域 -->
+    <el-form-item>
+      <el-button type="primary" plain class="search-btn" @click="search">搜索</el-button>
+      <el-button plain class="reset-btn" @click="reset">重置</el-button>
+    </el-form-item>
+  </el-form>
+</template>
+
+<script setup>
+import { ref, toRefs } from 'vue';
+import SearchItemConfig from './schema-item-config';
+
+const props = defineProps({
+  schema: Object
+});
+
+const { schema } = toRefs(props);
+
+const emit = defineEmits(['load', 'search', 'reset']);
+
+const searchComList = ref([]);
+const handleSearchComList = (el) => {
+  searchComList.value.push(el);
+}
+
+const getValue = () => {
+  let dtoObj = {};
+  searchComList.value.forEach(component => {
+    dtoObj = {
+      ...dtoObj,
+      ...component?.getValue()
+    }
+  });
+  return dtoObj;
+}
+let childComLoadedCount = 0;
+const handleChildLoaded = () => {
+  childComLoadedCount++;
+  if (childComLoadedCount >= Object.keys(schema?.value?.properties).length) {
+    emit('load', getValue());
+  }
+}
+
+const search = () => {
+  emit('search', getValue());
+}
+const reset = () => {
+  searchComList.value.forEach(component => component?.reset());
+  emit('reset');
+}
+
+defineExpose({
+  reset,
+  getValue
+});
+
+
+</script>
+<style lang="less"></style>

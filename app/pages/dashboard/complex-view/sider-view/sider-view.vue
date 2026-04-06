@@ -1,5 +1,5 @@
 <template>
-  <sider-container>
+  <sider-container class="sider-view-root">
     <template #menu-content>
       <el-menu :default-active="activeKey" :ellipsis="false" @select="onMenuSelect">
         <template v-for="item in menuList" :key="item.key">
@@ -18,7 +18,6 @@
 </template>
 
 <script setup>
-console.log('sider-view')
 
 import { ref, watch, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
@@ -79,7 +78,7 @@ const onMenuSelect = (menuKey) => {
   const pathMap = { iframe: '/iframe', schema: '/schema', custom: customConfig?.path };
 
   router.push({
-    path: `/sider${pathMap[moduleType]}`,
+    path: `/view/dashboard/sider${pathMap[moduleType]}`,
     query: {
       key: route.query.key,
       sider_key: key,
@@ -89,4 +88,9 @@ const onMenuSelect = (menuKey) => {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.sider-view-root {
+  flex: 1;
+  min-height: 0;
+}
+</style>

@@ -5,9 +5,12 @@ import { useMenuStore } from "$store/menu.js";
 export const useSchema = function () {
   const route = useRoute();
   const menuStore = useMenuStore();
+
   const api = ref("");
   const tableSchema = ref({});
   const tableConfig = ref({});
+  const searchConfig = ref({});
+  const searchSchema = ref({});
 
   // 构造 schemaConfig 相关配置，输送给 schemaView 解释。
   const buildData = function () {
@@ -19,15 +22,28 @@ export const useSchema = function () {
 
     if (mItem?.schemaConfig) {
       const { schemaConfig: sConfig } = mItem;
+
+      const configSchema = JSON.parse(JSON.stringify(sConfig.schema));
+
       api.value = sConfig.api ?? "";
-      // ✅ 修正：清空后重新赋值
+
       tableSchema.value = {};
       tableConfig.value = undefined;
-
+      searchConfig.value = {};
+      searchSchema.value = undefined;
       nextTick(() => {
-        // ✅ 修正：传入正确的参数
-        tableSchema.value = buildDtoSchema(sConfig, "table");
+        // 构造 tableSchema tableConfig
+        tableSchema.value = buildDtoSchema(configSchema, "table");
         tableConfig.value = sConfig.tableConfig;
+        // 构造 searchConfig searchSchema
+        const dtoSearchSchema = buildDtoSchema(configSchema, "search");
+        for (const key in dtoSearchSchema.properties) {
+          if (route.query[key] !== undefined) {
+            dtoSearchSchema.properties[key].option.default = route.query[key];
+          }
+        }
+        searchSchema.value = dtoSearchSchema;
+        searchConfig.value = sConfig.searchConfig;
       });
     }
   };
@@ -101,5 +117,7 @@ export const useSchema = function () {
     api,
     tableConfig,
     tableSchema,
+    searchConfig,
+    searchSchema,
   };
 };

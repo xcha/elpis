@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref, watch, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import SubMenu from '../sub-menu/sub-menu.vue';
 import HeaderContainer from '$widgets/header-container/header-container.vue';
 import { useMenuStore } from '$store/menu.js';
@@ -50,7 +50,7 @@ const projectStore = useProjectStore();
 defineProps({
   projName: String
 })
-
+const router = useRouter()
 const emit = defineEmits(['menu-select'])
 
 const activeKey = ref('');
@@ -81,13 +81,14 @@ const onMenuSelect = function (menuKey) {
   emit('menu-select', menuItem)
 }
 
+
 const handleProjectCommand = function (e) {
   const projectItem = projectStore.projectList.find(item => item.key === e);
   if (!projectItem || !projectItem.homePage) { return; }
-  const { origin, pathname } = window.location;
-  window.location.replace(`${origin}${pathname}#${projectItem.homePage}`);
-  window.location.reload();
+  const { origin } = window.location;
+  window.location.replace(`${origin}/view/dashboard${projectItem.homePage}`);
 }
+
 
 </script>
 <style lang="less" scoped>

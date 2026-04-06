@@ -1,3 +1,5 @@
+const { search } = require("superagent");
+
 {
   model: "dashboard"; // 模版类型，不同模版类型对应不一样的模版数据结构
   // 头部菜单
@@ -42,9 +44,17 @@
               ...schema, // 标准schema配置
               type: "",
               label: "",
+              // 字段在table的配置
               tableOption: {
                 ...elTableColumnConfig,
+                toFixed: 0,
                 visiable: true,
+              },
+              // 字段在 search-bar 中的相关配置
+              searchOption: {
+                ...eleComponentConfig, // 标准 el-component-column 配置
+                comType: "", // 配置组件类型 input/select/......
+                default: "", // 默认值
               },
             },
           },
