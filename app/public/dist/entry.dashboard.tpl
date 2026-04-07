@@ -8,7 +8,7 @@
     <title>Page 1 - Elpis</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-md5@0.8.3/src/md5.min.js"></script>
-  <script defer src="http://127.0.0.1:9002/public/dist/dev/js/vendor_abf132c6.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/common_71265f7b.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/entry.dashboard_f9b5ffb4.bundle.js"></script></head>
+  <script defer src="http://127.0.0.1:9002/public/dist/dev/js/vendor_abf132c6.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/common_71265f7b.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/entry.dashboard_9f295b07.bundle.js"></script></head>
   <body>
     <div id="root">
       <div class="container">

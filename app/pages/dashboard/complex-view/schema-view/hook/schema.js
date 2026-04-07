@@ -50,17 +50,16 @@ export const useSchema = function () {
 
   /**
    * 通用构建 schema 方法
-   * @param {Object} schemaConfig - 原始 schema 配置
+   * @param {Object} schema - 原始 schema 对象 (包含 properties)
    * @param {string} comName - 组件名称（如 'table'、'form' 等）
    * @returns {Object} 处理后的 schema
    */
-  const buildDtoSchema = (schemaConfig, comName) => {
-    // ✅ 修正：使用传入的参数
-    if (!schemaConfig?.schema?.properties) {
+  const buildDtoSchema = (schema, comName) => {
+    if (!schema?.properties) {
       return { type: "object", properties: {} };
     }
 
-    const sourceProperties = schemaConfig.schema.properties;
+    const sourceProperties = schema.properties;
     const dtoSchema = {
       type: "object",
       properties: {},

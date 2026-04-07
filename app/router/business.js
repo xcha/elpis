@@ -9,4 +9,9 @@ module.exports = (app, router) => {
     "/api/proj/product",
     businessController.remove.bind(businessController),
   );
+
+  router.get(
+    "/api/proj/product_enum/list",
+    businessController.getProductEnumList.bind(businessController),
+  );
 };

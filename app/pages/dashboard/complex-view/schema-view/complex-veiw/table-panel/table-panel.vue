@@ -9,7 +9,7 @@
     </el-row>
 
     <!-- 表格组件 -->
-    <schema-table ref="schemaTableRef" :schema="tableSchema" :api="api" :buttons="rowButtons"
+    <schema-table ref="schemaTableRef" :schema="tableSchema" :api="api" :apiParams="apiParams" :buttons="rowButtons"
       @operate="operationHandler" />
   </el-card>
 </template>
@@ -27,12 +27,12 @@ const SCHEMA_PREFIX = 'schema::'
 const emit = defineEmits(['operate'])
 
 // ==================== 依赖注入 ====================
-const { api, tableSchema, tableConfig } = inject('schemaViewData', {
+const { api, tableSchema, tableConfig, apiParams } = inject('schemaViewData', {
   api: '',
+  apiParams: {},
   tableSchema: {},
   tableConfig: {}
 })
-
 // ==================== Refs ====================
 const schemaTableRef = ref(null)
 // ==================== 计算属性 ====================
@@ -216,6 +216,8 @@ defineExpose({
 
 // 组件名称（便于调试）
 defineOptions({ name: 'TablePanel' })
+
+
 </script>
 
 <style lang="less" scoped>

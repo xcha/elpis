@@ -55,6 +55,10 @@ const props = defineProps({
   buttons: {
     type: Array,
     default: () => []
+  },
+  apiParams: {
+    type: Object,
+    default: () => ({})
   }
 })
 
@@ -120,6 +124,7 @@ const fetchTableData = async () => {
       url: `${props.api}/list`,
       method: 'get',
       query: {
+        ...props.apiParams,
         page: currentPage.value,
         size: pageSize.value
       }
@@ -204,7 +209,7 @@ defineExpose({
 // ==================== 生命周期 ====================
 // 监听 schema 或 api 变化
 watch(
-  [() => props.schema, () => props.api],
+  [() => props.schema, () => props.api, () => props.apiParams],
   () => {
     if (isSchemaReady.value && props.api) {
       initData()
@@ -219,6 +224,7 @@ onMounted(() => {
     initData()
   }
 })
+
 </script>
 
 <style lang="less" scoped>

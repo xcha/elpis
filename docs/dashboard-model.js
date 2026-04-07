@@ -55,6 +55,12 @@ const { search } = require("superagent");
                 ...eleComponentConfig, // 标准 el-component-column 配置
                 comType: "", // 配置组件类型 input/select/......
                 default: "", // 默认值
+
+                // comType==='select'时
+                enumList: [],
+
+                // comType==='dynamicSelect'时
+                api: "",
               },
             },
           },

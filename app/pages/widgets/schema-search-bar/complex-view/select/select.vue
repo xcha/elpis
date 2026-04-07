@@ -1,12 +1,16 @@
 <template>
-  <el-input v-model="dtoValue" v-bind="schema.option" class="input"></el-input>
+  <el-select v-model="dtoValue" v-bind="schema.option" class="select" clearable>
+    <el-option v-for="item in schema.option?.enumList" :key="item.value" :label="item.label" :value="item.value" />
+  </el-select>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
+
 const { schemaKey, schema } = defineProps({
   schemaKey: String,
   schema: Object
 });
+
 const emit = defineEmits(['loaded']);
 
 const dtoValue = ref();
@@ -15,7 +19,7 @@ const getValue = () => {
 };
 
 const reset = () => {
-  dtoValue.value = schema?.option?.default;
+  dtoValue.value = schema?.option?.default ?? schema.option?.enumList[0]?.value;
 };
 
 onMounted(() => {

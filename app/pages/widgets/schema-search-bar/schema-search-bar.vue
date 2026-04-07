@@ -1,5 +1,5 @@
 <template>
-  <el-form v-if="schema && schema.properties" :inlint="true" class="schema-search-bar">
+  <el-form v-if="schema && schema.properties" :inline="true" class="schema-search-bar">
     <!-- 动态组件 -->
     <el-form-item v-for="(schemaItem, key) in schema.properties" :key="key" :label="schemaItem.label">
       <!-- 展示子组件 -->
@@ -17,7 +17,7 @@
 
 <script setup>
 import { ref, toRefs } from 'vue';
-import SearchItemConfig from './schema-item-config';
+import SearchItemConfig from './search-item-config';
 
 const props = defineProps({
   schema: Object
@@ -65,4 +65,24 @@ defineExpose({
 
 
 </script>
-<style lang="less"></style>
+<style lang="less" scoped>
+.schema-search-bar {
+  min-width: 500px;
+
+  .input {
+    width: 180px;
+
+    .search-btn {
+      width: 100px;
+
+      .reset-btn {
+        width: 100px;
+      }
+    }
+  }
+
+  .select {
+    width: 180px;
+  }
+}
+</style>
