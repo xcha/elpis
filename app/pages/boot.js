@@ -4,7 +4,7 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
 import pinia from "$store";
-import { createWebHashHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
 
 /**
  *vue页面主入口，用于启动vue
@@ -31,7 +31,7 @@ export default (pageComponent, { routes, libs } = {}) => {
 
   if (routes && routes.length) {
     const router = createRouter({
-      history: createWebHashHistory(),
+      history: createWebHistory(),
       routes,
     });
     app.use(router);
