@@ -1,17 +1,19 @@
 <template>
   <el-config-provider :locale="zhCn">
-    <headerView :projName="projName" @menu-select="onMenuSelect">
-      <template #main-content>
-        <router-view></router-view>
-      </template>
-    </headerView>
+    <div class="dashboard-wrapper">
+      <header-view :proj-name="projName" @menu-select="onMenuSelect">
+        <template #main-content>
+          <router-view></router-view>
+        </template>
+      </header-view>
+    </div>
   </el-config-provider>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
-import headerView from './complex-view/header-view/header-view.vue';
+import HeaderView from './complex-view/header-view/header-view.vue';
 import $curl from '$common/curl.js';
 import { useMenuStore } from '$store/menu.js';
 import { useProjectStore } from '$store/project.js';
@@ -22,6 +24,7 @@ const menuStore = useMenuStore();
 const projectStore = useProjectStore();
 
 onMounted(() => {
+  // window.projKey = route.query.proj_key;
   getProjectList();
   getProjectConfig();
 });
@@ -42,7 +45,7 @@ async function getProjectList() {
   projectStore.setProjectList(res.data);
 }
 
-// 请求/api/project接口，并缓存到menu-store中
+// 请求/api/project接口，并g缓存到menu-store中
 async function getProjectConfig() {
   const res = await $curl({
     method: 'get',
@@ -75,7 +78,7 @@ const onMenuSelect = function (menuItem) {
 
   }
   router.push({
-    path: pathMap[moduleType],
+    path: `/view/dashboard${pathMap[moduleType]}`,
     query: {
       key,
       proj_key: route.query.proj_key
@@ -85,7 +88,13 @@ const onMenuSelect = function (menuItem) {
 </script>
 
 <style lang="less" scoped>
-:deep(.el-menu--horizontal>.el-menu-item) {
-  border-bottom: 0
+.dashboard-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+:deep(.el-menu--horizontal > .el-menu-item) {
+  border-bottom: 0;
 }
 </style>
